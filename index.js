@@ -8,11 +8,22 @@ dotenv.config();
 
 const app = express();
 
-// Enable CORS for all origins (adjust for production)
+const allowedOrigins = [
+  "https://gemini-brand.vercel.app/", // production
+  "http://localhost:3000", // local dev
+];
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
-    credentials: true,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
   })
 );
 
