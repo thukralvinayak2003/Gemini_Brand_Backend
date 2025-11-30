@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 
 const allowedOrigins = [
-  "https://gemini-brand.vercel.app/", // production
+  "https://gemini-brand.vercel.app", // production
   "http://localhost:3000", // local dev
 ];
 
